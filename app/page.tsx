@@ -5,11 +5,13 @@ import { eq } from "drizzle-orm";
 
 import { getUser } from "@/lib/auth";
 
-import Note from "@/components/Note";
+import NoteList from "@/components/NoteList";
+
+import { NoteType } from "@/types/note";
 
 export default async function Home() {
   const user = await getUser();
-  const _notes = await db
+  const _notes: NoteType[] = await db
     .select()
     .from(notes)
     .where(eq(notes.userId, user.id))
@@ -18,10 +20,8 @@ export default async function Home() {
   return (
     <main>
       <Header />
-      <div className="mt-8 grid w-full max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {_notes.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
+      <div className="container mt-8 grid w-full max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <NoteList notes={_notes} />
       </div>
     </main>
   );
