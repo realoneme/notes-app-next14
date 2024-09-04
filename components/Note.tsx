@@ -1,6 +1,7 @@
 "use client";
 
 import { Note as NoteType } from "@/db/schemas/notes";
+import { useLongPress } from "@uidotdev/usehooks";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import clsx from "clsx";
@@ -8,11 +9,23 @@ import { notojp } from "@/app/styles/fonts";
 
 type Props = {
   note: NoteType;
+  swapy: any;
 };
 
-const Note = ({ note }: Props) => {
+const Note = ({ note, swapy }: Props) => {
+  const attrs = useLongPress(
+    () => {
+      swapy.enable(true);
+    },
+    {
+      onStart: (event) => console.log("Press started"),
+      onFinish: (event) => swapy.enable(false),
+      onCancel: (event) => console.log("Press cancelled"),
+      threshold: 500,
+    },
+  );
   return (
-    <div data-swapy-slot={note.id + "" + note.createAt}>
+    <div data-swapy-slot={note.id + "" + note.createAt} {...attrs}>
       <div
         data-swapy-item={note.id}
         className="custom-scrollbar h-96 w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap break-words rounded-lg bg-muted/80 p-6"

@@ -1,31 +1,29 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createSwapy } from "swapy";
 
 import { NoteType } from "@/types/note";
 import Note from "@/components/Note";
 
-import { Keyboard } from "lucide-react";
-
 interface NoteListProps {
   notes: NoteType[];
 }
 const NoteList = ({ notes }: NoteListProps) => {
+  const [swapy, setSwapy] = useState<any>(null);
   useEffect(() => {
     const container = document.querySelector(".container");
-    console.log(container);
-
     if (container) {
       console.log(container);
 
       const swapy = createSwapy(container, {
         animation: "dynamic", // or spring or none
       });
-      swapy.enable(true);
+      setSwapy(swapy);
+      // swapy.enable(true);
     }
   }, []);
 
-  return notes.map((note) => <Note key={note.id} note={note} />);
+  return notes.map((note) => <Note key={note.id} note={note} swapy={swapy} />);
 };
 
 export default NoteList;
