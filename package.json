@@ -10,6 +10,7 @@
     "migrate": "drizzle-kit generate --dialect=postgresql --schema=./db/schemas/*.ts --out=./db/migrations/drizzle && node ./db/migrations/migrate.js"
   },
   "dependencies": {
+    "@dnd-kit/sortable": "^8.0.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
