@@ -23,7 +23,13 @@ const NoteList = ({ notes }: NoteListProps) => {
     }
   }, []);
 
-  return notes.map((note) => <Note key={note.id} note={note} swapy={swapy} />);
+  return (
+    <div className="grid h-screen w-full max-w-6xl grid-cols-1 gap-4 overflow-scroll sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {notes.map((note) => (
+        <Note key={note.id} note={note} swapy={swapy} />
+      ))}
+    </div>
+  );
 };
 
 export default NoteList;
