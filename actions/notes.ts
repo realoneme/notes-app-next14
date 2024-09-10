@@ -15,7 +15,17 @@ export const createNoteAction = async (formData: FormData) => {
       throw new Error("ログインしていません");
     }
     const text = formData.get("text") as string;
-    await db.insert(notes).values({ text, userId: user.id });
+    const insertedNote = await db
+      .insert(notes)
+      .values({ text, userId: user.id })
+      .returning({ id: notes.id });
+    const generatedId = insertedNote[0].id;
+    await db
+      .update(notes)
+      .set({
+        order: generatedId.toString(),
+      })
+      .where(eq(notes.id, generatedId));
     revalidatePath("/");
     return { errorMessage: null };
   } catch (error) {

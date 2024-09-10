@@ -15,7 +15,9 @@ type Props = {
 
 const Note = ({ note }: Props) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: note.id });
+    useSortable({
+      id: note.id,
+    });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,

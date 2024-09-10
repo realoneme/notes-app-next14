@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <main>
       <Header />
-      <div className="m-auto mt-8">
+      <div className="mt-8">
         <NoteList notes={_notes} />
       </div>
     </main>

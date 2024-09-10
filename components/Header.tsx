@@ -3,6 +3,7 @@ import { Lilita_One } from "next/font/google";
 
 import UserButton from "./UserButton";
 import AddNewNoteButton from "./AddNewNoteButton";
+import SortButton from "./SortButton";
 import clsx from "clsx";
 
 const lilita = Lilita_One({ weight: "400", subsets: ["latin"] });
@@ -19,6 +20,7 @@ const Header = async () => {
       >
         SIMPLE NOTES
       </h1>
+      <SortButton />
       <AddNewNoteButton />
     </div>
   );

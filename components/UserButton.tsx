@@ -4,7 +4,6 @@ import { LogOut, UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { User } from "@supabase/supabase-js";
 import { signoutAction } from "@/actions/users";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +19,7 @@ type Props = {
   user: User;
   className?: string;
 };
-const UserButton = ({ user, className }: Props) => {
+const UserButton = ({ user }: Props) => {
   const router = useRouter();
   const handleSignOut = async () => {
     const toastId = toast.loading("Signing out...");
